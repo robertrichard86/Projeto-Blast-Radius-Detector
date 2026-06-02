@@ -4,7 +4,9 @@
 
 ## Descrição
 
-O **Projeto Blast Radius Detector** é uma ferramenta para analisar e estimar o impacto ("raio de explosão") de mudanças ou incidentes em sistemas e estruturas de dados. Ele auxilia na identificação de dependências e potenciais riscos.
+O **Projeto Blast Radius Detector** é um sistema de classificação de risco para comandos de infraestrutura que estima o impacto potencial de uma operação antes de sua execução — separando comandos inofensivos de ações catastróficas. O projeto foi desenvolvido como trabalho de conclusão da disciplina de Machine Learning II e evoluiu por cinco iterações consecutivas baseadas em feedback real.
+O sistema utiliza uma arquitetura de três camadas com votação ponderada: uma heurística determinística de palavras-chave (50%), um Random Forest com vetorização TF-IDF (25%) e o modelo de NLP multilingual XLM-RoBERTa-Large-XNLI via zero-shot classification (25%). O resultado final é um score de risco classificado em quatro níveis — Baixo, Médio, Alto e Crítico — acompanhado de um grafo dinâmico de propagação que mapeia os alvos afetados e potenciais cascatas de dependência.
+Entre os principais recursos estão: threshold de confiança no NLP (abstém-se abaixo de 50%, prevenindo falsos positivos em comandos como ls -la), feedback loop com re-treino incremental do modelo sem necessidade de re-execução completa da pipeline, dataset de 502 exemplos com verificação de consistência por assertion, cobertura de comandos cloud-native (Terraform, Kubernetes, Docker, AWS CLI, GCloud), e console interativo com semáforo visual e breakdown por camada.
 
 ## Estrutura do Repositório
 
